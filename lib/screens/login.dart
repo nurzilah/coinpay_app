@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'home.dart'; // Ganti sesuai path kamu
 import 'registration.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   String completePhone = '';
   bool isPasswordFilled = false;
+  bool passwordVisible = false;
 
   @override
   void initState() {
@@ -26,12 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void handleLogin() {
     if (passwordController.text == '123456') {
-      // Dummy login sukses
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login berhasil!')),
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     } else {
-      // Dummy login gagal
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Password salah. Gunakan 123456')),
       );
@@ -52,17 +53,14 @@ class _LoginScreenState extends State<LoginScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const RegistrationScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(), // close keyboard on tap outside
+        onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Column(
@@ -115,13 +113,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 6),
+
+              // Password field with eye icon
               TextField(
                 controller: passwordController,
-                obscureText: true,
+                obscureText: !passwordVisible,
                 decoration: InputDecoration(
-                  hintText: '••••••••',
-                  hintStyle: const TextStyle(letterSpacing: 4, fontFamily: 'Poppins'),
-                  suffixIcon: const Icon(Icons.visibility_off),
+                  hintText: '',
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -136,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    // forgot password
+                    // forgot password logic
                   },
                   child: const Text(
                     'Forgot password?',
@@ -157,8 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: isPasswordFilled ? handleLogin : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        isPasswordFilled ? Colors.blue : Colors.grey.shade300,
+                    backgroundColor: isPasswordFilled ? Colors.blue : Colors.grey.shade300,
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(

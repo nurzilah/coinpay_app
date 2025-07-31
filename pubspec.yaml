@@ -28,9 +28,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  intl_phone_field: ^3.2.0
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.7.0
+  simple_icons: ^14.6.1
+  intl_phone_field: ^3.2.0
+  flutter_svg: ^2.0.7
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -58,7 +61,14 @@ flutter:
     - assets/images/signup-1.png
     - assets/images/signup-2.png
     - assets/images/signup-3.png
+    - assets/images/regis.png
     - assets/images/icon.png
+    - assets/images/pp_linkedin.jpg
+    - assets/icons/chart-pie.svg
+    - assets/icons/chat.svg
+    - assets/icons/home.svg
+    - assets/icons/scanner.svg
+    - assets/icons/user.svg
 
   fonts:
       - family: Poppins

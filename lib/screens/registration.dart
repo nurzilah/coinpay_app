@@ -1,7 +1,7 @@
 import 'package:coinpay_app/screens/create_account.dart';
 import 'package:flutter/material.dart';
 import 'registration.dart';
-import 'login.dart'; // Pastikan file login.dart sudah dibuat
+import 'login.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -9,12 +9,12 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F6FA),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black54),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -23,10 +23,13 @@ class RegistrationScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              const SizedBox(height: 60),
+              const SizedBox(height: 40),
 
-              // Ilustrasi bisa kamu sesuaikan di sini...
-              // ...
+              // Gambar regis.png
+              Image.asset(
+                'assets/images/regis.png',
+                height: 180,
+              ),
 
               const SizedBox(height: 40),
 

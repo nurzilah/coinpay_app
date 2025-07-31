@@ -14,6 +14,8 @@ class _LoginScreenState extends State<CreateAccount> {
   final TextEditingController passwordController = TextEditingController();
   String completePhone = '';
   bool isPasswordFilled = false;
+  bool passwordVisible = false;
+
 
   @override
   void initState() {
@@ -108,10 +110,14 @@ class _LoginScreenState extends State<CreateAccount> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: BackButton(color: Colors.black87),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
+
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
@@ -129,7 +135,7 @@ class _LoginScreenState extends State<CreateAccount> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'Enter your registered mobile number to log in.',
+                'Enter your registered mobile number to Sign up.',
                 style: TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Colors.black54),
               ),
               const SizedBox(height: 32),
@@ -148,16 +154,26 @@ class _LoginScreenState extends State<CreateAccount> {
               const SizedBox(height: 6),
               TextField(
                 controller: passwordController,
-                obscureText: true,
+                obscureText: !passwordVisible,
                 decoration: InputDecoration(
-                  hintText: '••••••••',
-                  hintStyle: const TextStyle(letterSpacing: 4, fontFamily: 'Poppins'),
-                  suffixIcon: const Icon(Icons.visibility_off),
+                  hintText: '', // hint dikosongkan
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 style: const TextStyle(fontFamily: 'Poppins'),
               ),
+
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
@@ -177,7 +193,7 @@ class _LoginScreenState extends State<CreateAccount> {
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text('Sign in', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
+                  child: const Text('Sign up', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
                 ),
               ),
               const SizedBox(height: 32),

@@ -1,6 +1,7 @@
 import 'package:coinpay_app/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  OnboardingPage()),
+        MaterialPageRoute(builder: (context) => OnboardingPage()),
       );
     });
   }
@@ -77,25 +78,23 @@ class _SplashScreenState extends State<SplashScreen>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF2563EB), // Blue-600 (atas)
-              Color(0xFF1D4ED8), // Blue-700 (tengah)
-              Color(0xFF1E40AF), // Blue-800 (bawah)
+              Color(0xFF2563EB),
+              Color(0xFF1D4ED8),
+              Color(0xFF1E40AF),
             ],
             stops: [0.0, 0.5, 1.0],
           ),
         ),
         child: Stack(
           children: [
-            // Square pattern background
+            // Dot pattern background
             Positioned.fill(
               child: CustomPaint(
-                painter: SquarePatternPainter(),
+                painter: DotPatternPainter(),
               ),
             ),
             
-
-
-            // Logo and text
+            // Logo and text centered
             Center(
               child: AnimatedBuilder(
                 animation: _animationController,
@@ -107,54 +106,25 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Logo circles - exact positioning
-                          Container(
-                            width: 100,
-                            height: 60,
-                            child: Stack(
-                              children: [
-                                // Left circle (white filled)
-                                Positioned(
-                                  left: 0,
-                                  top: 5,
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                ),
-                                // Right circle (white outline only)
-                                Positioned(
-                                  right: 0,
-                                  top: 5,
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.white,
-                                        width: 3.5,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                          // CoinPay Logo using SVG
+                          SvgPicture.asset(
+                            'assets/icons/Coinpay.svg',
+                            width: 80,
+                            height: 80,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 16),
                           // CoinPay text
                           const Text(
                             'CoinPay',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 28,
+                              fontSize: 24,
                               fontWeight: FontWeight.w500,
-                              letterSpacing: -0.5,
+                              letterSpacing: 0.5,
                               fontFamily: 'SF Pro Display',
                             ),
                           ),
@@ -166,43 +136,51 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
 
-
+            // Bottom home indicator
+            Positioned(
+              bottom: 8,
+              left: MediaQuery.of(context).size.width / 2 - 67,
+              child: Container(
+                width: 134,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(2.5),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
-
 }
 
-class SquarePatternPainter extends CustomPainter {
+class DotPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.08)
+      ..color = Colors.white.withOpacity(0.15)
       ..style = PaintingStyle.fill;
 
-    const double squareSize = 3.0;
-    const double spacing = 18.0;
+    const double dotSize = 2.0;
+    const double spacing = 20.0;
 
-    // Create grid pattern of small squares
-    for (double y = 0; y < size.height + spacing; y += spacing) {
-      for (double x = 0; x < size.width + spacing; x += spacing) {
-        // Vary opacity based on distance from center for depth effect
+    // Create dot pattern similar to Figma design
+    for (double y = spacing; y < size.height; y += spacing) {
+      for (double x = spacing; x < size.width; x += spacing) {
+        // Vary opacity for depth effect
         final centerX = size.width / 2;
         final centerY = size.height / 2;
         final distanceFromCenter = ((x - centerX).abs() + (y - centerY).abs()) / (size.width + size.height);
-        final opacity = (0.12 - distanceFromCenter * 0.06).clamp(0.03, 0.12);
+        final opacity = (0.2 - distanceFromCenter * 0.1).clamp(0.05, 0.2);
         
         paint.color = Colors.white.withOpacity(opacity);
         
-        // Draw small square
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(
-            Rect.fromLTWH(x - squareSize/2, y - squareSize/2, squareSize, squareSize),
-            const Radius.circular(0.5),
-          ),
+        // Draw dot
+        canvas.drawCircle(
+          Offset(x, y),
+          dotSize / 2,
           paint,
         );
       }

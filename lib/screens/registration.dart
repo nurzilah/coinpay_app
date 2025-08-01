@@ -74,7 +74,7 @@ class RegistrationScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color(0xFF304FFE),
                         foregroundColor: Colors.white,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
@@ -107,9 +107,9 @@ class RegistrationScreen extends StatelessWidget {
                         );
                       },
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.blue,
+                        foregroundColor: Color(0xFF304FFE),
                         side: const BorderSide(
-                          color: Colors.blue,
+                          color: Color(0xFF304FFE),
                           width: 1.5,
                         ),
                         shape: RoundedRectangleBorder(
@@ -143,7 +143,7 @@ class RegistrationScreen extends StatelessWidget {
                     TextSpan(
                       text: 'Terms of Service',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color(0xFF304FFE),
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -151,7 +151,7 @@ class RegistrationScreen extends StatelessWidget {
                     TextSpan(
                       text: 'Privacy Policy',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color(0xFF304FFE),
                         decoration: TextDecoration.underline,
                       ),
                     ),

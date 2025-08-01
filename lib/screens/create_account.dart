@@ -16,7 +16,6 @@ class _LoginScreenState extends State<CreateAccount> {
   bool isPasswordFilled = false;
   bool passwordVisible = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -38,7 +37,7 @@ class _LoginScreenState extends State<CreateAccount> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.verified_user, size: 60, color: Colors.blue),
+              const Icon(Icons.verified_user, size: 60, color: Color(0xFF304FFE)),
               const SizedBox(height: 16),
               const Text(
                 "Verify your phone number\nbefore we send code",
@@ -60,8 +59,10 @@ class _LoginScreenState extends State<CreateAccount> {
                 ),
               ),
               const SizedBox(height: 24),
+              // Updated popup button styling
               SizedBox(
                 width: double.infinity,
+                height: 54,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context); // tutup popup
@@ -71,10 +72,21 @@ class _LoginScreenState extends State<CreateAccount> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: Color(0xFF304FFE),
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27),
+                    ),
                   ),
-                  child: const Text("Yes", style: TextStyle(fontFamily: 'Poppins')),
+                  child: const Text(
+                    "Yes",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -117,7 +129,6 @@ class _LoginScreenState extends State<CreateAccount> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
@@ -173,7 +184,6 @@ class _LoginScreenState extends State<CreateAccount> {
                 ),
                 style: const TextStyle(fontFamily: 'Poppins'),
               ),
-
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,
@@ -183,17 +193,28 @@ class _LoginScreenState extends State<CreateAccount> {
                 ),
               ),
               const SizedBox(height: 16),
+              // Updated main button styling
               SizedBox(
-                width: double.infinity,
-                height: 48,
+                width: double.infinity, // Lebar penuh
+                height: 54, // Tinggi 54 piksel
                 child: ElevatedButton(
                   onPressed: isPasswordFilled ? handleLogin : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isPasswordFilled ? Colors.blue : Colors.grey.shade300,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: isPasswordFilled ? Color(0xFF304FFE) : Colors.grey.shade300, // Biru solid saat aktif, abu-abu saat nonaktif
+                    foregroundColor: isPasswordFilled ? Colors.white : Colors.grey.shade600, // Teks putih saat aktif, abu-abu saat nonaktif
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27), // Radius 27 untuk tampilan oval
+                    ),
                   ),
-                  child: const Text('Sign up', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
+                  child: const Text(
+                    'Sign up',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16, // Ukuran font 16
+                      fontWeight: FontWeight.w600, // Ketebalan semi-bold
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 32),

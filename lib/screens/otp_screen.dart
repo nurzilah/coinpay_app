@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'welcome.dart'; // Import welcome screen
 
 class OtpScreen extends StatefulWidget {
   final String phone;
@@ -18,7 +19,11 @@ class _OtpScreenState extends State<OtpScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('OTP Verified!')),
       );
-      // Navigate to next screen if needed
+      // Navigate to welcome screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter 6 digit code')),
@@ -95,7 +100,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: const Text(
                   "Didn't get a code? Resend",
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFF304FFE),
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
                   ),
@@ -104,21 +109,26 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
 
             const SizedBox(height: 24),
+            // Updated button styling
             SizedBox(
-              width: double.infinity,
-              height: 48,
+              width: double.infinity, // Lebar penuh
+              height: 54, // Tinggi 54 piksel
               child: ElevatedButton(
                 onPressed: verifyOtp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  backgroundColor: Color(0xFF304FFE), // Biru solid
+                  foregroundColor: Colors.white, // Teks putih
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(27), // Radius 27 untuk tampilan oval
+                  ),
                 ),
                 child: const Text(
                   'Verify Your Number',
                   style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    fontSize: 16, // Ukuran font 16
+                    fontWeight: FontWeight.w600, // Ketebalan semi-bold
                   ),
                 ),
               ),

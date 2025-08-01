@@ -1,3 +1,6 @@
+import 'package:coinpay_app/screens/accountsetup.dart' hide HomeScreen;
+import 'package:coinpay_app/screens/accountverif.dart';
+import 'package:coinpay_app/screens/addingcard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coinpay_app/screens/home.dart';
@@ -19,42 +22,45 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.contentPrimary),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'My Profile',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: Text('My Profile', style: TextStyle(fontFamily: 'Poppins', color: AppColors.contentPrimary)),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit_outlined, color: AppColors.contentPrimary, size: 20),
+            onPressed: () {
+              // Handle edit profile
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
+            const SizedBox(height: 20),
             // Profile Header
             Container(
-              padding: const EdgeInsets.all(20),
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
+                    color: Colors.black.withOpacity(0.05),
+                    spreadRadius: 0,
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -66,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey[300]!, width: 2),
+                      border: Border.all(color: const Color(0xFFE5E7EB), width: 2),
                     ),
                     child: ClipOval(
                       child: Image.asset(
@@ -74,11 +80,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
-                            color: Colors.grey[300],
+                            color: const Color(0xFFF3F4F6),
                             child: const Icon(
                               Icons.person,
                               size: 40,
-                              color: Colors.grey,
+                              color: Color(0xFF9CA3AF),
                             ),
                           );
                         },
@@ -88,16 +94,99 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 16),
                   const Text(
                     'Nurzilah Hidayati',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF1F2937),
+                    ),
                   ),
                   const SizedBox(height: 4),
-                  const Text('nurzilah.hyt@gmail.com', style: TextStyle(color: Colors.grey)),
-                  const Text('+6285712799296', style: TextStyle(color: Colors.grey)),
+                  const Text(
+                    'nurzilah.hyt@gmail.com',
+                    style: TextStyle(
+                      color: Color(0xFF6B7280),
+                      fontSize: 14,
+                    ),
+                  ),
+                  const Text(
+                    '+6285712799296',
+                    style: TextStyle(
+                      color: Color(0xFF6B7280),
+                      fontSize: 14,
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-            _buildSettings(),
+            const SizedBox(height: 24),
+            
+            // Settings Section
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    spreadRadius: 0,
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  _buildSettingsItem(
+                    'assets/icons/moon.svg', 
+                    const Color(0xFF6B7280), 
+                    'Dark Mode',
+                    trailing: Transform.scale(
+                      scale: 0.8,
+                      child: Switch(
+                        value: isDarkMode,
+                        onChanged: (value) => setState(() => isDarkMode = value),
+                        activeColor: const Color(0xFF3B82F6),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ),
+                    onTap: null, // Dark mode tidak perlu navigasi
+                  ),
+                  _buildSettingsItem(
+                    'assets/icons/user-2.svg', 
+                    const Color(0xFF3B82F6), 
+                    'Personal Info',
+                    onTap: () => _navigateToPersonalInfo(context),
+                  ),
+                  _buildSettingsItem(
+                    'assets/icons/bank.svg', 
+                    const Color(0xFFF59E0B), 
+                    'Bank & Cards',
+                    onTap: () => _navigateToBankCards(context),
+                  ),
+                  _buildSettingsItem(
+                    'assets/icons/credit-card-change.svg', 
+                    const Color(0xFFEF4444), 
+                    'Transaction',
+                    onTap: () => _navigateToTransaction(context),
+                  ),
+                  _buildSettingsItem(
+                    'assets/icons/settings.svg', 
+                    const Color(0xFF3B82F6), 
+                    'Settings',
+                    onTap: () => _navigateToSettings(context),
+                  ),
+                  _buildSettingsItem(
+                    'assets/icons/database.svg', 
+                    const Color(0xFF10B981), 
+                    'Data Privacy', 
+                    showDivider: false,
+                    onTap: () => _navigateToDataPrivacy(context),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 100), // Bottom padding for navigation
           ],
         ),
@@ -123,7 +212,132 @@ class _ProfilePageState extends State<ProfilePage> {
             _buildNavItem(context, 'assets/icons/chart-pie.svg', 'Spending', isActive: false),
             _buildNavItem(context, 'assets/icons/scanner.svg', 'QR', isActive: false, isCenter: true),
             _buildNavItem(context, 'assets/icons/chat.svg', 'Support', isActive: false),
-            _buildNavItem(context, 'assets/icons/user.svg', 'Profile', isActive: true),
+            _buildNavItem(context, 'assets/icons/user-2.svg', 'Profile', isActive: true),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Navigation methods untuk settings items
+  void _navigateToPersonalInfo(BuildContext context) {
+    // Sementara menggunakan placeholder page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AccountSetupScreen(),
+      ),
+    );
+    
+    // Uncomment ini setelah file personal_info.dart dibuat
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const PersonalInfoScreen()),
+    // );
+  }
+
+  void _navigateToBankCards(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddingCardFlow(),
+      ),
+    );
+    
+    // Uncomment ini setelah file bank_cards.dart dibuat
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const BankCardsScreen()),
+    // );
+  }
+
+  void _navigateToTransaction(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => _buildPlaceholderPage('Transaction'),
+      ),
+    );
+    
+    // Uncomment ini setelah file transaction.dart dibuat
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const TransactionScreen()),
+    // );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AccountVerificationFlow(),
+      ),
+    );
+    
+    // Uncomment ini setelah file settings.dart dibuat
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const SettingsScreen()),
+    // );
+  }
+
+  void _navigateToDataPrivacy(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => _buildPlaceholderPage('Data Privacy'),
+      ),
+    );
+    
+    // Uncomment ini setelah file data_privacy.dart dibuat
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const DataPrivacyScreen()),
+    // );
+  }
+
+  // Placeholder page sementara
+  Widget _buildPlaceholderPage(String title) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.contentPrimary),
+          onPressed: () => Navigator.pop(context),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          title, 
+          style: TextStyle(fontFamily: 'Poppins', color: AppColors.contentPrimary)
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.construction,
+              size: 64,
+              color: AppColors.contentTertiary,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '$title Page',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1F2937),
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Coming Soon...',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF6B7280),
+              ),
+            ),
           ],
         ),
       ),
@@ -223,57 +437,66 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  Widget _buildSettings() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _buildSettingsItem(Icons.dark_mode, Colors.grey, 'Dark Mode',
-              trailing: Switch(
-                value: isDarkMode,
-                onChanged: (value) => setState(() => isDarkMode = value),
-                activeColor: Colors.blue,
-              )),
-          _buildSettingsItem(Icons.person_outline, Colors.blue, 'Personal Info'),
-          _buildSettingsItem(Icons.account_balance_wallet_outlined, Colors.orange, 'Bank & Cards'),
-          _buildSettingsItem(Icons.receipt_long_outlined, Colors.red, 'Transaction'),
-          _buildSettingsItem(Icons.settings_outlined, Colors.blue, 'Settings'),
-          _buildSettingsItem(Icons.privacy_tip_outlined, Colors.green, 'Data Privacy', showDivider: false),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSettingsItem(IconData icon, Color iconColor, String title, {Widget? trailing, bool showDivider = true}) {
+  Widget _buildSettingsItem(
+    String iconPath, 
+    Color iconColor, 
+    String title, {
+    Widget? trailing, 
+    bool showDivider = true,
+    VoidCallback? onTap, // Tambahan parameter untuk handle tap
+  }) {
     return Column(
       children: [
-        ListTile(
-          leading: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-            child: Icon(icon, color: iconColor, size: 20),
+        GestureDetector( // Tambahkan GestureDetector untuk handle tap
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: iconColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      iconPath,
+                      width: 22,
+                      height: 22,
+                      colorFilter: ColorFilter.mode(
+                        iconColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF1F2937),
+                    ),
+                  ),
+                ),
+                trailing ?? const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: Color(0xFF9CA3AF),
+                ),
+              ],
+            ),
           ),
-          title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-          trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
         ),
         if (showDivider)
-          Divider(
+          Container(
+            margin: const EdgeInsets.only(left: 80),
             height: 1,
-            color: Colors.grey[200],
-            indent: 20,
-            endIndent: 20,
+            color: const Color(0xFFF3F4F6),
           ),
       ],
     );

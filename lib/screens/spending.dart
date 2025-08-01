@@ -70,22 +70,22 @@ class _SpendingScreenState extends State<SpendingScreen> {
   final List<Map<String, dynamic>> categoryData = [
     {
       'name': 'Spending',
-      'icon': Icons.credit_card,
+      'iconPath': 'assets/icons/credit-card-minus.svg',
       'color': Color(0xFF4F7DF9),
     },
     {
       'name': 'Income',
-      'icon': Icons.trending_up,
+      'iconPath': 'assets/icons/coins.svg',
       'color': Color(0xFF00C896),
     },
     {
       'name': 'Bills',
-      'icon': Icons.receipt_long,
+      'iconPath': 'assets/icons/invoice.svg',
       'color': Color(0xFFFFC107),
     },
     {
       'name': 'Savings',
-      'icon': Icons.savings,
+      'iconPath': 'assets/icons/sack-dollar.svg',
       'color': Color(0xFFFF9800),
     },
   ];
@@ -96,21 +96,14 @@ class _SpendingScreenState extends State<SpendingScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.contentPrimary),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
-          'Spending',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: Text('Spending', style: TextStyle(fontFamily: 'Poppins', color: AppColors.contentPrimary)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -282,7 +275,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
             
             SizedBox(height: 24),
             
-            // Category Icons
+            // Category Icons - FIXED VERSION
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: categoryData.map((category) {
@@ -294,10 +287,14 @@ class _SpendingScreenState extends State<SpendingScreen> {
                         color: category['color'].withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(
-                        category['icon'],
-                        color: category['color'],
-                        size: 24,
+                      child: SvgPicture.asset(
+                        category['iconPath'], // Menggunakan iconPath yang benar
+                        width: 24,
+                        height: 24,
+                        colorFilter: ColorFilter.mode(
+                          category['color'],
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                     SizedBox(height: 8),
@@ -416,14 +413,14 @@ class _SpendingScreenState extends State<SpendingScreen> {
       
       // Bottom Navigation Bar
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
               color: AppColors.contentPrimary.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, -2),
+              offset: const Offset(0, -2),
             ),
           ],
         ),
@@ -431,7 +428,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNavItem(context, 'assets/icons/home.svg', 'Home', isActive: false),
-            _buildNavItem(context, 'assets/icons/chart-pie.svg', 'Spending', isActive: true),
+            _buildNavItem(context, 'assets/icons/chart-pie-2.svg', 'Spending', isActive: true),
             _buildNavItem(context, 'assets/icons/scanner.svg', 'QR', isActive: false, isCenter: true),
             _buildNavItem(context, 'assets/icons/chat.svg', 'Support', isActive: false),
             _buildNavItem(context, 'assets/icons/user.svg', 'Profile', isActive: false),
@@ -474,7 +471,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: SvgPicture.asset(
                   iconPath,
                   width: 24,
@@ -485,7 +482,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Container(
                 width: 4,
                 height: 4,
@@ -507,7 +504,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
       case 'Home':
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
         break;
       case 'Spending':
@@ -516,19 +513,19 @@ class _SpendingScreenState extends State<SpendingScreen> {
       case 'QR':
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => QrisScreen()),
+          MaterialPageRoute(builder: (context) => const QrisScreen()),
         );
         break;
       case 'Support':
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SupportScreen()),
+          MaterialPageRoute(builder: (context) => const SupportScreen()),
         );
         break;
       case 'Profile':
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         break;
     }

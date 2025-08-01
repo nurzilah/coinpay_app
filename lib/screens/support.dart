@@ -1,3 +1,4 @@
+import 'package:coinpay_app/screens/support2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coinpay_app/constants/color.dart';
@@ -36,17 +37,18 @@ class _SupportScreenState extends State<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.bgLight,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.contentPrimary),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Support', style: TextStyle(fontFamily: 'Poppins', color: Colors.black)),
+        title: Text('Support', style: TextStyle(fontFamily: 'Poppins', color: AppColors.contentPrimary)),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -56,10 +58,11 @@ class _SupportScreenState extends State<SupportScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 40),
+                    const Spacer(flex: 2),
                     Image.asset(
-                      'assets/images/support_illustration.png', 
+                      'assets/icons/chat-bot.svg', 
                       height: 200,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
@@ -67,56 +70,78 @@ class _SupportScreenState extends State<SupportScreen> {
                           child: Icon(
                             Icons.support_agent,
                             size: 100,
-                            color: Colors.grey[400],
+                            color: AppColors.contentDisabled,
                           ),
                         );
                       },
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
+                    const SizedBox(height: 32),
+                    Text(
                       'CoinPay Support',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 35,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
+                        color: AppColors.contentPrimary,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Our dedicated team is here to assist you\nwith any questions or issues related to our app.',
+                    const SizedBox(height: 12),
+                    Text(
+                      'Our dedicated team is here to assist you\nwith any questions or issues related to our\nCoinPay mobile app.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, color: Colors.black54, fontFamily: 'Poppins'),
+                      style: TextStyle(
+                        fontSize: 14, 
+                        color: AppColors.contentTertiary, 
+                        fontFamily: 'Poppins',
+                        height: 1.5,
+                      ),
                     ),
-                    const SizedBox(height: 32),
+                    const Spacer(flex: 1),
                     SizedBox(
                       width: double.infinity,
-                      height: 48,
+                      height: 56,
                       child: ElevatedButton.icon(
-                        icon: const Icon(Icons.chat_bubble_outline),
-                        label: const Text('Start Chat', style: TextStyle(fontFamily: 'Poppins')),
-                        onPressed: () => setState(() {}),
+                        icon: SvgPicture.asset(
+                          'assets/icons/chat.svg',
+                          width: 20,
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.contentOnColor,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        label: const Text('Start Chat', style: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.w500)),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const Support2Screen()),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: AppColors.contentOnColor,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+                          elevation: 0,
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
-                      height: 48,
+                      height: 56,
                       child: OutlinedButton.icon(
-                        icon: const Icon(Icons.help_outline),
-                        label: const Text('View FAQ', style: TextStyle(fontFamily: 'Poppins')),
+                        icon: Icon(Icons.help_outline, color: AppColors.primary),
+                        label: Text('View FAQ', style: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.primary)),
                         onPressed: () {
                           // Navigasi ke halaman FAQ nanti
                         },
                         style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          side: BorderSide(color: AppColors.primary, width: 1.5),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 100), // Bottom padding for navigation
+                    const Spacer(flex: 2),
                   ],
                 ),
               ),
@@ -138,7 +163,7 @@ class _SupportScreenState extends State<SupportScreen> {
                       padding: const EdgeInsets.all(12),
                       constraints: const BoxConstraints(maxWidth: 280),
                       decoration: BoxDecoration(
-                        color: isBot ? Colors.grey.shade200 : Colors.blue,
+                        color: isBot ? AppColors.divider : AppColors.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -146,7 +171,7 @@ class _SupportScreenState extends State<SupportScreen> {
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 14,
-                          color: isBot ? Colors.black : Colors.white,
+                          color: isBot ? AppColors.contentPrimary : AppColors.contentOnColor,
                         ),
                       ),
                     ),
@@ -158,7 +183,7 @@ class _SupportScreenState extends State<SupportScreen> {
             // Chat input
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              color: Colors.white,
+              color: AppColors.bgLight,
               child: Row(
                 children: [
                   Expanded(
@@ -166,7 +191,7 @@ class _SupportScreenState extends State<SupportScreen> {
                       controller: messageController,
                       decoration: InputDecoration(
                         hintText: 'Type a message',
-                        hintStyle: const TextStyle(fontFamily: 'Poppins'),
+                        hintStyle: TextStyle(fontFamily: 'Poppins', color: AppColors.contentTertiary),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                     ),
@@ -174,7 +199,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   const SizedBox(width: 8),
                   IconButton(
                     onPressed: sendMessage,
-                    icon: const Icon(Icons.send, color: Colors.blue),
+                    icon: Icon(Icons.send, color: AppColors.primary),
                   )
                 ],
               ),
@@ -202,7 +227,7 @@ class _SupportScreenState extends State<SupportScreen> {
             _buildNavItem(context, 'assets/icons/home.svg', 'Home', isActive: false),
             _buildNavItem(context, 'assets/icons/chart-pie.svg', 'Spending', isActive: false),
             _buildNavItem(context, 'assets/icons/scanner.svg', 'QR', isActive: false, isCenter: true),
-            _buildNavItem(context, 'assets/icons/chat.svg', 'Support', isActive: true),
+            _buildNavItem(context, 'assets/icons/chat-2.svg', 'Support', isActive: true),
             _buildNavItem(context, 'assets/icons/user.svg', 'Profile', isActive: false),
           ],
         ),

@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 8),
 
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
                     // forgot password logic
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text(
                     'Forgot password?',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Color(0xFF304FFE),
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
                     ),
@@ -160,24 +160,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 16),
 
+              // Updated button with new styling
               SizedBox(
-                width: double.infinity,
-                height: 48,
+                width: double.infinity, // Lebar penuh
+                height: 54, // Tinggi 54 piksel
                 child: ElevatedButton(
                   onPressed: isPasswordFilled ? handleLogin : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isPasswordFilled ? Colors.blue : Colors.grey.shade300,
-                    foregroundColor: Colors.white,
+                    backgroundColor: isPasswordFilled ? Color(0xFF304FFE) : Colors.grey.shade300, // Biru solid saat aktif, abu-abu saat nonaktif
+                    foregroundColor: isPasswordFilled ? Colors.white : Colors.grey.shade600, // Teks putih saat aktif, abu-abu saat nonaktif
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(27), // Radius 27 untuk tampilan oval
                     ),
                   ),
                   child: const Text(
                     'Log in',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16, // Ukuran font 16
+                      fontWeight: FontWeight.w600, // Ketebalan semi-bold
                       fontFamily: 'Poppins',
                     ),
                   ),

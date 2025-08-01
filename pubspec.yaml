@@ -34,6 +34,10 @@ dependencies:
   simple_icons: ^14.6.1
   intl_phone_field: ^3.2.0
   flutter_svg: ^2.0.7
+  permission_handler: ^11.0.0
+  camera: ^0.10.5+5
+  path_provider: ^2.1.1
+  path: ^1.8.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -50,10 +54,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
 
@@ -64,11 +64,36 @@ flutter:
     - assets/images/regis.png
     - assets/images/icon.png
     - assets/images/pp_linkedin.jpg
+    - assets/icons/
     - assets/icons/chart-pie.svg
     - assets/icons/chat.svg
     - assets/icons/home.svg
     - assets/icons/scanner.svg
     - assets/icons/user.svg
+    - assets/icons/chat-bot.svg
+    - assets/icons/paperclip.svg
+    - assets/icons/send.svg
+    - assets/icons/moon.svg
+    - assets/icons/user-2.svg
+    - assets/icons/bank.svg
+    - assets/icons/credit-card-change.svg
+    - assets/icons/settings.svg
+    - assets/icons/database.svg
+    - assets/icons/home-2.svg
+    - assets/icons/chart-pie.svg
+    - assets/icons/chat-2.svg
+    - assets/icons/Coinpay.svg
+    - assets/icons/credit-card-minus.svg
+    - assets/icons/coins.svg
+    - assets/icons/invoice.svg
+    - assets/icons/sack-dollar.svg
+    - assets/icons/sliders-horizontal-alt.svg
+    - assets/icons/bell.svg
+    - assets/icons/trophy-star.svg
+    - assets/icons/wallet.svg
+    - assets/icons/Mastercard.svg
+    - assets/icons/briefcase.svg
+    - assets/icons/receipt-list.svg
 
   fonts:
       - family: Poppins

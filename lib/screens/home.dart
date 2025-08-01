@@ -20,7 +20,15 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.all(20),
               child: Row(
                 children: [
-                  Icon(Icons.shield_outlined, color: AppColors.contentOnColor),
+                  SvgPicture.asset(
+                    'assets/icons/trophy-star.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.contentOnColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   SizedBox(width: 8),
                   Expanded(
                     child: Container(
@@ -42,7 +50,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 16),
-                  Icon(Icons.notifications_outlined, color: AppColors.contentOnColor),
+                  SvgPicture.asset(
+                    'assets/icons/bell.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.contentOnColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -108,7 +124,15 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.add, color: AppColors.primary, size: 20),
+                        SvgPicture.asset(
+                          'assets/icons/wallet.svg',
+                          width: 20,
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.primary,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                         SizedBox(width: 8),
                         Text(
                           'Add Money',
@@ -174,29 +198,29 @@ class HomeScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         children: [
                           _buildTransactionItem(
-                            icon: Icons.credit_card,
-                            iconColor: AppColors.primary,
+                            iconPath: 'assets/icons/credit-card-minus.svg',
+                            iconColor: Color(0xFF4F7DF9),
                             title: 'Spending',
                             amount: '-\$500',
                             amountColor: AppColors.error,
                           ),
                           _buildTransactionItem(
-                            icon: Icons.trending_up,
-                            iconColor: AppColors.success,
+                            iconPath: 'assets/icons/coins.svg',
+                            iconColor: Color(0xFF00C896),
                             title: 'Income',
                             amount: '\$3000',
                             amountColor: AppColors.success,
                           ),
                           _buildTransactionItem(
-                            icon: Icons.receipt_long,
-                            iconColor: AppColors.warning,
+                            iconPath: 'assets/icons/invoice.svg',
+                            iconColor: Color(0xFFFFC107),
                             title: 'Bills',
                             amount: '-\$800',
                             amountColor: AppColors.error,
                           ),
                           _buildTransactionItem(
-                            icon: Icons.savings,
-                            iconColor: AppColors.warning,
+                            iconPath: 'assets/icons/sack-dollar.svg',
+                            iconColor: Color(0xFFFF9800),
                             title: 'Savings',
                             amount: '\$1000',
                             amountColor: AppColors.warning,
@@ -226,7 +250,7 @@ class HomeScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildNavItem(context, 'assets/icons/home.svg', 'Home', isActive: true),
+            _buildNavItem(context, 'assets/icons/home-2.svg', 'Home', isActive: true),
             _buildNavItem(context, 'assets/icons/chart-pie.svg', 'Spending', isActive: false),
             _buildNavItem(context, 'assets/icons/scanner.svg', 'QR', isActive: false, isCenter: true),
             _buildNavItem(context, 'assets/icons/chat.svg', 'Support', isActive: false),
@@ -321,7 +345,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTransactionItem({required IconData icon, required Color iconColor, required String title, required String amount, required Color amountColor}) {
+  Widget _buildTransactionItem({required String iconPath, required Color iconColor, required String title, required String amount, required Color amountColor}) {
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -339,7 +363,17 @@ class HomeScreen extends StatelessWidget {
               color: iconColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, color: iconColor, size: 20),
+            child: Center(
+              child: SvgPicture.asset(
+                iconPath,
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(
+                  iconColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
           ),
           SizedBox(width: 12),
           Expanded(

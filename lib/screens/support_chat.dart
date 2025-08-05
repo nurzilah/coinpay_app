@@ -95,7 +95,7 @@ class _Support2ScreenState extends State<Support2Screen> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: SvgPicture.asset(
@@ -164,7 +164,7 @@ class _Support2ScreenState extends State<Support2Screen> {
                               width: 32,
                               height: 32,
                               decoration: BoxDecoration(
-                                color: AppColors.primary.withOpacity(0.1),
+                                color: AppColors.primary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: SvgPicture.asset(

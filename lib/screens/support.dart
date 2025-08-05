@@ -1,4 +1,4 @@
-import 'package:coinpay_app/screens/support2.dart';
+import 'package:coinpay_app/screens/support_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coinpay_app/constants/color.dart';
@@ -65,7 +65,7 @@ class _SupportScreenState extends State<SupportScreen> {
                       'assets/icons/chat-bot.svg', 
                       height: 200,
                       errorBuilder: (context, error, stackTrace) {
-                        return Container(
+                        return SizedBox(
                           height: 200,
                           child: Icon(
                             Icons.support_agent,
@@ -215,7 +215,7 @@ class _SupportScreenState extends State<SupportScreen> {
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
-              color: AppColors.contentPrimary.withOpacity(0.1),
+              color: AppColors.contentPrimary.withValues(alpha: 0.5),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),

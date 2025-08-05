@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
-import 'dart:io';
 
 import 'profile.dart';
 
 class AccountVerificationFlow extends StatefulWidget {
+  const AccountVerificationFlow({super.key});
+
   @override
-  _AccountVerificationFlowState createState() => _AccountVerificationFlowState();
+  State<AccountVerificationFlow> createState() => _AccountVerificationFlowState();
 }
 
 class _AccountVerificationFlowState extends State<AccountVerificationFlow>
     with TickerProviderStateMixin {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentStep = 0;
   
   // Animation controllers
@@ -51,7 +50,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
     try {
       _cameras = await availableCameras();
     } catch (e) {
-      print('Error initializing cameras: $e');
+      debugPrint('Error initializing cameras: $e');
     }
   }
 
@@ -87,7 +86,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
         });
       }
     } catch (e) {
-      print('Error initializing camera: $e');
+      debugPrint('Error initializing camera: $e');
     }
   }
 
@@ -100,7 +99,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
       final XFile picture = await _cameraController!.takePicture();
       
       // You can save the picture or process it here
-      print('Picture taken: ${picture.path}');
+      debugPrint('Picture taken: ${picture.path}');
       
       // Simulate processing delay
       await Future.delayed(Duration(seconds: 1));
@@ -121,14 +120,16 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
         });
         _disposeCamera();
         
-        // Navigate to profile page
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
-        );
+        // FIX: Add mounted check before navigation
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+        }
       }
     } catch (e) {
-      print('Error taking picture: $e');
+      debugPrint('Error taking picture: $e');
     }
   }
 
@@ -146,7 +147,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
         _isFlashOn ? FlashMode.torch : FlashMode.off,
       );
     } catch (e) {
-      print('Error toggling flash: $e');
+      debugPrint('Error toggling flash: $e');
     }
   }
 
@@ -307,7 +308,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
           Spacer(),
           
           // Illustration
-          Container(
+          SizedBox(
             height: 200,
             child: Stack(
               alignment: Alignment.center,
@@ -541,7 +542,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
           Spacer(),
           
           // ID Card illustration
-          Container(
+          SizedBox(
             height: 200,
             child: Stack(
               alignment: Alignment.center,
@@ -555,7 +556,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
                     border: Border.all(color: Colors.grey[300]!),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withValues(alpha: 0.2),
                         spreadRadius: 2,
                         blurRadius: 8,
                         offset: Offset(0, 4),
@@ -719,7 +720,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
                     Shadow(
                       offset: Offset(0, 1),
                       blurRadius: 4,
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                     ),
                   ],
                 ),
@@ -733,10 +734,8 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
             left: 0,
             right: 0,
             bottom: 0,
-            child: Container(
-              child: CustomPaint(
-                painter: DocumentScanOverlayPainter(),
-              ),
+            child: CustomPaint(
+              painter: DocumentScanOverlayPainter(),
             ),
           ),
           
@@ -758,7 +757,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
                     Shadow(
                       offset: Offset(0, 1),
                       blurRadius: 4,
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                     ),
                   ],
                 ),
@@ -811,14 +810,10 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
                   ),
                 ),
                 
-                // Switch camera button (hidden for document scan)
-                Container(
+                // FIXED: Line 848 - Replace Container with SizedBox for whitespace
+                SizedBox(
                   width: 50,
                   height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    shape: BoxShape.circle,
-                  ),
                 ),
               ],
             ),
@@ -848,7 +843,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
           Spacer(),
           
           // Selfie illustration
-          Container(
+          SizedBox(
             height: 200,
             child: Stack(
               alignment: Alignment.center,
@@ -864,7 +859,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
                 ),
                 
                 // Person illustration
-                Container(
+                SizedBox(
                   width: 80,
                   height: 100,
                   child: Column(
@@ -972,6 +967,7 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
             ),
           ),
           
+          // FIXED: Line 864 (originally at end of method) - Replace Container with SizedBox for whitespace
           SizedBox(height: 20),
         ],
       ),
@@ -1000,10 +996,8 @@ class _AccountVerificationFlowState extends State<AccountVerificationFlow>
           
           // Oval overlay
           Positioned.fill(
-            child: Container(
-              child: CustomPaint(
-                painter: OvalOverlayPainter(),
-              ),
+            child: CustomPaint(
+              painter: OvalOverlayPainter(),
             ),
           ),
           
@@ -1095,7 +1089,7 @@ class DocumentScanOverlayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Colors.black.withOpacity(0.6)
+      ..color = Colors.black.withValues(alpha: 0.6)
       ..style = PaintingStyle.fill;
 
     Path path = Path();
@@ -1183,7 +1177,7 @@ class OvalOverlayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Colors.black.withOpacity(0.5)
+      ..color = Colors.black.withValues(alpha: 0.5)
       ..style = PaintingStyle.fill;
 
     Path path = Path();

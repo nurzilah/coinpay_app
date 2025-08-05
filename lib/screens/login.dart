@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'home.dart'; // Ganti sesuai path kamu
-import 'registration.dart';
+import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

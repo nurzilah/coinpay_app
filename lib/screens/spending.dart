@@ -8,7 +8,7 @@ import 'package:coinpay_app/screens/profile.dart';
 import 'package:simple_icons/simple_icons.dart';
 
 class SpendingScreen extends StatefulWidget {
-  const SpendingScreen({Key? key}) : super(key: key);
+  const SpendingScreen({super.key});
 
   @override
   State<SpendingScreen> createState() => _SpendingScreenState();
@@ -156,7 +156,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                         Text(
                           'Total Spend',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                             fontSize: 14,
                           ),
                         ),
@@ -187,7 +187,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                         Text(
                           'Available Balance',
                           style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
+                            color: Colors.black.withValues(alpha: 0.7),
                             fontSize: 14,
                           ),
                         ),
@@ -218,7 +218,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 10,
                     offset: Offset(0, 2),
                   ),
@@ -284,7 +284,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                     Container(
                       padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: category['color'].withOpacity(0.1),
+                        color: category['color'].withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: SvgPicture.asset(
@@ -348,7 +348,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 8,
                         offset: Offset(0, 2),
                       ),
@@ -359,7 +359,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
                       Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: transaction['color'].withOpacity(0.1),
+                          color: transaction['color'].withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -418,7 +418,7 @@ class _SpendingScreenState extends State<SpendingScreen> {
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
-              color: AppColors.contentPrimary.withOpacity(0.1),
+              color: AppColors.contentPrimary.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),

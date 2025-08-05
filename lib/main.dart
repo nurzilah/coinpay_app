@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'constants/color.dart';
 import 'screens/home.dart';
-import 'screens/onboarding.dart';
-import 'screens/splashscreen.dart';
+import 'screens/on_boarding.dart';
+import 'screens/splash_screen.dart';
 
 
 void main() {
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
-              color: AppColors.contentPrimary.withOpacity(0.1),
+              color: AppColors.contentPrimary.withValues(alpha: 0.5),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
@@ -161,7 +161,7 @@ class SpendingScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.contentPrimary.withOpacity(0.1),
+                      color: AppColors.contentPrimary.withValues(alpha: 0.5),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
@@ -231,7 +231,7 @@ class QRISScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.contentPrimary.withOpacity(0.1),
+                      color: AppColors.contentPrimary.withValues(alpha: 0.3),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
@@ -318,7 +318,7 @@ class ChatScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.contentPrimary.withOpacity(0.1),
+                      color: AppColors.contentPrimary.withValues(alpha: 0.5),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
@@ -388,7 +388,7 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.contentPrimary.withOpacity(0.1),
+                      color: AppColors.contentPrimary.withValues(alpha: 0.5),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
@@ -396,7 +396,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                   radius: 40,
-                  backgroundColor: AppColors.primary.withOpacity(0.1),
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.5),
                   child: const Icon(Icons.person, size: 40, color: AppColors.primary),
                 ),
               ),
@@ -442,7 +442,7 @@ class ProfileScreen extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.primary.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: AppColors.primary),

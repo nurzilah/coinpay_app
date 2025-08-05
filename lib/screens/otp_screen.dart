@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'welcome.dart'; // Import welcome screen
+import 'welcome.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phone;

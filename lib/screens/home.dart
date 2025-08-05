@@ -34,16 +34,16 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       decoration: BoxDecoration(
-                        color: AppColors.contentOnColor.withOpacity(0.2),
+                        color: AppColors.contentOnColor.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.search, color: AppColors.contentOnColor.withOpacity(0.7), size: 20),
+                          Icon(Icons.search, color: AppColors.contentOnColor.withValues(alpha: 0.7), size: 20),
                           SizedBox(width: 8),
                           Text(
                             'Search "Payments"',
-                            style: TextStyle(color: AppColors.contentOnColor.withOpacity(0.7), fontSize: 14),
+                            style: TextStyle(color: AppColors.contentOnColor.withValues(alpha: 0.7), fontSize: 14),
                           ),
                         ],
                       ),
@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         'Available Balance',
                         style: TextStyle(
-                          color: AppColors.contentOnColor.withOpacity(0.8),
+                          color: AppColors.contentOnColor.withValues(alpha: 0.8),
                           fontSize: 14,
                         ),
                       ),
@@ -241,7 +241,7 @@ class HomeScreen extends StatelessWidget {
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
-              color: AppColors.contentPrimary.withOpacity(0.1),
+              color: AppColors.contentPrimary.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: Offset(0, -2),
             ),
@@ -324,7 +324,7 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: AppColors.contentPrimary.withOpacity(0.1),
+                color: AppColors.contentPrimary.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: Offset(0, 2),
               ),
@@ -360,7 +360,7 @@ class HomeScreen extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.1),
+              color: iconColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(

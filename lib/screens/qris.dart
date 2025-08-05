@@ -5,7 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class QrisScreen extends StatefulWidget {
-  const QrisScreen({Key? key}) : super(key: key);
+  const QrisScreen({super.key});
 
   @override
   State<QrisScreen> createState() => _QrisScreenState();
@@ -286,7 +286,7 @@ class _QrisScreenState extends State<QrisScreen> {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF304FFE).withOpacity(0.3),
+              color: const Color(0xFF304FFE).withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -356,7 +356,7 @@ class _QrisScreenState extends State<QrisScreen> {
 
 // QR Scanner Screen dengan Mobile Scanner - FIXED FRAME POSITION
 class QRScannerScreen extends StatefulWidget {
-  const QRScannerScreen({Key? key}) : super(key: key);
+  const QRScannerScreen({super.key});
 
   @override
   State<QRScannerScreen> createState() => _QRScannerScreenState();
@@ -508,7 +508,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
           Positioned.fill(
             child: ColorFiltered(
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.6),
+                Colors.black.withValues(alpha: 0.6),
                 BlendMode.srcOut,
               ),
               child: Stack(
@@ -541,7 +541,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
             left: 20,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 shape: BoxShape.circle,
               ),
               child: IconButton(
@@ -690,7 +690,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                                   color: const Color(0xFF304FFE),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF304FFE).withOpacity(0.8),
+                                      color: const Color(0xFF304FFE).withValues(alpha: 0.8),
                                       blurRadius: 10,
                                       spreadRadius: 2,
                                     ),
@@ -720,8 +720,8 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                           height: 60,
                           decoration: BoxDecoration(
                             color: _flashOn 
-                                ? Colors.yellow.withOpacity(0.3)
-                                : Colors.black.withOpacity(0.3),
+                                ? Colors.yellow.withValues(alpha: 0.3)
+                                : Colors.black.withValues(alpha: 0.3),
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: Colors.white30,
@@ -769,7 +769,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
                           width: 60,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: Colors.white30,
@@ -812,9 +812,9 @@ class SelectPurposeScreen extends StatefulWidget {
   final Map<String, String> selectedRecipient;
   
   const SelectPurposeScreen({
-    Key? key,
+    super.key,
     required this.selectedRecipient,
-  }) : super(key: key);
+  });
 
   @override
   State<SelectPurposeScreen> createState() => _SelectPurposeScreenState();
@@ -907,7 +907,7 @@ class _SelectPurposeScreenState extends State<SelectPurposeScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFF304FFE).withOpacity(0.08) : Colors.white,
+                          color: isSelected ? const Color(0xFF304FFE).withValues(alpha: 0.08) : Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: isSelected 
@@ -931,9 +931,12 @@ class _SelectPurposeScreenState extends State<SelectPurposeScreen> {
                                   purpose['icon'],
                                   width: 20,
                                   height: 20,
-                                  color: isSelected 
-                                      ? const Color(0xFF304FFE)
-                                      : Colors.grey.shade600,
+                                  colorFilter: ColorFilter.mode(
+                                    isSelected 
+                                        ? const Color(0xFF304FFE)
+                                        : Colors.grey.shade600,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                               ),
                             ),
@@ -1055,17 +1058,17 @@ class EnterAmountScreen extends StatefulWidget {
   final String selectedPurpose;
   
   const EnterAmountScreen({
-    Key? key,
+    super.key,
     required this.selectedRecipient,
     required this.selectedPurpose,
-  }) : super(key: key);
+  });
 
   @override
   State<EnterAmountScreen> createState() => _EnterAmountScreenState();
 }
 
 class _EnterAmountScreenState extends State<EnterAmountScreen> {
-  String _amount = '500';
+  final String _amount = '500';
 
   @override
   Widget build(BuildContext context) {
@@ -1242,18 +1245,18 @@ class ChooseAccountScreen extends StatefulWidget {
   final String amount;
   
   const ChooseAccountScreen({
-    Key? key,
+    super.key,
     required this.selectedRecipient,
     required this.selectedPurpose,
     required this.amount,
-  }) : super(key: key);
+  });
 
   @override
   State<ChooseAccountScreen> createState() => _ChooseAccountScreenState();
 }
 
 class _ChooseAccountScreenState extends State<ChooseAccountScreen> {
-  String _selectedAccount = 'Account ************3954';
+  final String _selectedAccount = 'Account ************3954';
 
   @override
   Widget build(BuildContext context) {
@@ -1484,12 +1487,12 @@ class PaymentSuccessScreen extends StatelessWidget {
   final String selectedAccount;
   
   const PaymentSuccessScreen({
-    Key? key,
+    super.key,
     required this.selectedRecipient,
     required this.selectedPurpose,
     required this.amount,
     required this.selectedAccount,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

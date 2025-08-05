@@ -1,10 +1,9 @@
 import 'package:coinpay_app/screens/create_account.dart';
 import 'package:flutter/material.dart';
-import 'registration.dart';
 import 'login.dart';
 
 class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

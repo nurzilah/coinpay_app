@@ -1,13 +1,9 @@
-import 'package:coinpay_app/main.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
 
-// Import HomeScreen - pastikan path sesuai dengan struktur project Anda
-// import 'home_screen.dart'; // Uncomment dan sesuaikan path
-
 class AccountSetupScreen extends StatefulWidget {
-  const AccountSetupScreen({Key? key}) : super(key: key);
+  const AccountSetupScreen({super.key});
 
   @override
   State<AccountSetupScreen> createState() => _AccountSetupScreenState();
@@ -303,7 +299,7 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
     );
   }
 
-  Widget _buildCompletionStep() {
+  Widget _buildCompletionStep() { // ignore: unused_element
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -407,8 +403,8 @@ class _AccountSetupScreenState extends State<AccountSetupScreen> {
     );
   }
 
-  bool _canContinue() {
-    switch (_currentStep) {
+  bool _canContinue() { // ignore: unused_element
+     switch (_currentStep) {
       case 0: // Email step
         return _emailController.text.isNotEmpty && 
                _emailController.text.contains('@');

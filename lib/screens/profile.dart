@@ -1,6 +1,6 @@
-import 'package:coinpay_app/screens/accountsetup.dart' hide HomeScreen;
-import 'package:coinpay_app/screens/accountverif.dart';
-import 'package:coinpay_app/screens/addingcard.dart';
+import 'package:coinpay_app/screens/account_setup.dart';
+import 'package:coinpay_app/screens/account_verif.dart';
+import 'package:coinpay_app/screens/adding_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:coinpay_app/screens/home.dart';
@@ -10,7 +10,7 @@ import 'package:coinpay_app/screens/support.dart';
 import 'package:coinpay_app/constants/color.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     spreadRadius: 0,
                     blurRadius: 20,
                     offset: const Offset(0, 4),
@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     spreadRadius: 0,
                     blurRadius: 20,
                     offset: const Offset(0, 4),
@@ -199,7 +199,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: AppColors.bgLight,
           boxShadow: [
             BoxShadow(
-              color: AppColors.contentPrimary.withOpacity(0.1),
+              color: AppColors.contentPrimary.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -457,7 +457,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: iconColor.withOpacity(0.1),
+                    color: iconColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(

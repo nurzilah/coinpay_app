@@ -1,10 +1,10 @@
-import 'package:coinpay_app/screens/onboarding.dart';
+import 'package:coinpay_app/screens/on_boarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -54,10 +54,13 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Navigate to onboarding after 3 seconds
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnboardingPage()),
-      );
+      // Check if widget is still mounted before using BuildContext
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => OnboardingPage()),
+        );
+      }
     });
   }
 
@@ -160,7 +163,7 @@ class DotPatternPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.15)
+      ..color = Colors.white.withValues(alpha: 0.15)
       ..style = PaintingStyle.fill;
 
     const double dotSize = 2.0;
@@ -175,7 +178,7 @@ class DotPatternPainter extends CustomPainter {
         final distanceFromCenter = ((x - centerX).abs() + (y - centerY).abs()) / (size.width + size.height);
         final opacity = (0.2 - distanceFromCenter * 0.1).clamp(0.05, 0.2);
         
-        paint.color = Colors.white.withOpacity(opacity);
+        paint.color = Colors.white.withValues(alpha: opacity);
         
         // Draw dot
         canvas.drawCircle(

@@ -1,4 +1,3 @@
-import 'package:coinpay_app/screens/home.dart';
 import 'package:coinpay_app/screens/login.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                         Positioned(
                           left: 80,
                           top: 60,
-                          child: Container(
+                          child: SizedBox(
                             width: 60,
                             height: 80,
                             child: Stack(
@@ -129,7 +128,7 @@ class WelcomeScreen extends StatelessWidget {
                         Positioned(
                           bottom: 30,
                           right: 80,
-                          child: Container(
+                          child: SizedBox(
                             width: 40,
                             height: 60,
                             child: Stack(

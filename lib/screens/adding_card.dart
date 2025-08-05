@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AddingCardFlow extends StatefulWidget {
+  const AddingCardFlow({super.key});
+  
   @override
-  _AddingCardFlowState createState() => _AddingCardFlowState();
+  // FIX: Remove underscore to make State class public
+  State<AddingCardFlow> createState() => AddingCardFlowState();
 }
 
-class _AddingCardFlowState extends State<AddingCardFlow> {
-  PageController _pageController = PageController();
+// FIX: Make State class public by removing underscore
+class AddingCardFlowState extends State<AddingCardFlow> {
+  final PageController _pageController = PageController();
   int currentPage = 0;
 
   // Form controllers
@@ -217,7 +221,6 @@ class _AddingCardFlowState extends State<AddingCardFlow> {
     );
   }
 
-  // Screen 4: Card List
   Widget _buildCardListScreen() {
     return Padding(
       padding: EdgeInsets.all(24.0),
@@ -237,7 +240,7 @@ class _AddingCardFlowState extends State<AddingCardFlow> {
           Expanded(
             child: Column(
               children: [
-                ...cardList.map((card) => _buildCardItem(card)).toList(),
+                ...cardList.map((card) => _buildCardItem(card)),
                 Spacer(),
                 _buildButton(
                   text: "Add another card",
@@ -276,7 +279,7 @@ class _AddingCardFlowState extends State<AddingCardFlow> {
           Expanded(
             child: Column(
               children: [
-                ...cardList.map((card) => _buildCardItem(card, showDelete: true)).toList(),
+                ...cardList.map((card) => _buildCardItem(card, showDelete: true)),
                 Spacer(),
                 _buildButton(
                   text: "Add another card",
